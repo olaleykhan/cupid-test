@@ -1,28 +1,26 @@
 const express = require('express');
+
 const dotenv = require('dotenv');
 
+// import our route file
+const route = require('./route/route')
 
-const data = require('./data/dummy');
+
+// initialize express
+const app = express();
+
+app.use(route);
+
+// Create our handlers
+
+// app.get('/',(req,res)=>{
+    
+//     res.send('<h1> Welcome on board sir</h1>')
+// })
 
 // initialize env
 dotenv.config();
 
+const PORT = process.env.port || 5000;
 
-
-
-const app = express()
-
-const HOST = 'localhost'
-
-
-app.get('/',(req,res)=>{
-    res.send('<h1> Hello and welcome to test api. navigate to /dummy-data to find our dummy data<h1>')
-});
-
-app.get('/dummy-data',(req,res)=>{
-    res.status(200).json(data)
-})
-
-const PORT = process.env.port || 5050;
-
-app.listen(PORT, console.log(`api running at ${HOST}: ${PORT}`, data))
+app.listen(PORT, ()=>console.log(`running on port ${PORT}`))
